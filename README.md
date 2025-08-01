@@ -1,4 +1,4 @@
-# Context Engineering Template
+# Context Engineering Template - Flutter & Node.js
 
 A comprehensive template for getting started with Context Engineering - the discipline of engineering context for AI coding assistants so they have the information necessary to get the job done end to end.
 
@@ -8,7 +8,7 @@ A comprehensive template for getting started with Context Engineering - the disc
 
 ```bash
 # 1. Clone this template
-git clone https://github.com/adriestevezdev/context-engineering-saas
+git clone https://github.com/your-username/context-engineering-flutter-node
 
 # 2. Set up your project rules (optional - template provided)
 # Edit CLAUDE.md to add your project-specific guidelines
@@ -64,7 +64,7 @@ Context Engineering represents a paradigm shift from traditional prompt engineer
 ## Template Structure
 
 ```
-context-engineering-intro/
+context-engineering-flutter-node/
 ├── .claude/
 │   ├── commands/
 │   │   ├── generate-prp.md    # Generates comprehensive PRPs
@@ -75,13 +75,15 @@ context-engineering-intro/
 │   │   └── prp_base.md       # Base template for PRPs
 │   └── EXAMPLE_multi_agent_prp.md  # Example of a complete PRP
 ├── examples/                  # Your code examples (critical!)
-├── CLAUDE.md                 # Global rules for AI assistant
+│   ├── flutter/              # Flutter patterns and examples
+│   └── backend/              # Node.js patterns and examples
+├── frontend/              # Your Flutter application
+├── backend/                  # Your Node.js backend
+├── CLAUDE.md                # Global rules for AI assistant
 ├── INITIAL.md               # Template for feature requests
 ├── INITIAL_EXAMPLE.md       # Example feature request
 └── README.md                # This file
 ```
-
-This template doesn't focus on RAG and tools with context engineering because I have a LOT more in store for that soon. ;)
 
 ## Step-by-Step Guide
 
@@ -105,11 +107,14 @@ Edit `INITIAL.md` to describe what you want to build:
 ## FEATURE:
 [Describe what you want to build - be specific about functionality and requirements]
 
+## PLATFORMS:
+[iOS, Android, Web - specify which platforms you're targeting]
+
 ## EXAMPLES:
 [List any example files in the examples/ folder and explain how they should be used]
 
 ## DOCUMENTATION:
-[Include links to relevant documentation, APIs, or MCP server resources]
+[Include links to relevant documentation, APIs, or packages]
 
 ## OTHER CONSIDERATIONS:
 [Mention any gotchas, specific requirements, or things AI assistants commonly miss]
@@ -126,18 +131,10 @@ PRPs (Product Requirements Prompts) are comprehensive implementation blueprints 
 - Error handling patterns
 - Test requirements
 
-They are similar to PRDs (Product Requirements Documents) but are crafted more specifically to instruct an AI coding assistant.
-
 Run in Claude Code:
 ```bash
 /generate-prp INITIAL.md
 ```
-
-**Note:** The slash commands are custom commands defined in `.claude/commands/`. You can view their implementation:
-- `.claude/commands/generate-prp.md` - See how it researches and creates PRPs
-- `.claude/commands/execute-prp.md` - See how it implements features from PRPs
-
-The `$ARGUMENTS` variable in these commands receives whatever you pass after the command name (e.g., `INITIAL.md` or `PRPs/your-feature.md`).
 
 This command will:
 1. Read your feature request
@@ -165,8 +162,13 @@ The AI coding assistant will:
 ### Key Sections Explained
 
 **FEATURE**: Be specific and comprehensive
-- ❌ "Build a web scraper"
-- ✅ "Build an async web scraper using BeautifulSoup that extracts product data from e-commerce sites, handles rate limiting, and stores results in PostgreSQL"
+- ❌ "Build a chat feature"
+- ✅ "Build an async real-time chat with typing indicators, read receipts, image sharing, and offline support for iOS/Android/Web"
+
+**PLATFORMS**: Specify target platforms
+- iOS (minimum version)
+- Android (minimum SDK)
+- Web (browser requirements)
 
 **EXAMPLES**: Leverage the examples/ folder
 - Place relevant code patterns in `examples/`
@@ -174,16 +176,16 @@ The AI coding assistant will:
 - Explain what aspects should be mimicked
 
 **DOCUMENTATION**: Include all relevant resources
-- API documentation URLs
-- Library guides
-- MCP server documentation
-- Database schemas
+- Flutter package documentation
+- Node.js/Express API documentation
+- Database schema requirements
+- Third-party service docs
 
 **OTHER CONSIDERATIONS**: Capture important details
-- Authentication requirements
-- Rate limits or quotas
-- Common pitfalls
+- Platform-specific differences
 - Performance requirements
+- Common pitfalls
+- Security considerations
 
 ## The PRP Workflow
 
@@ -192,14 +194,14 @@ The AI coding assistant will:
 The command follows this process:
 
 1. **Research Phase**
-   - Analyzes your codebase for patterns
+   - Analyzes your Flutter and Node.js codebase
    - Searches for similar implementations
    - Identifies conventions to follow
 
 2. **Documentation Gathering**
-   - Fetches relevant API docs
-   - Includes library documentation
-   - Adds gotchas and quirks
+   - Fetches relevant Flutter/Dart docs
+   - Includes Node.js/Express patterns
+   - Adds package documentation
 
 3. **Blueprint Creation**
    - Creates step-by-step implementation plan
@@ -213,13 +215,11 @@ The command follows this process:
 ### How /execute-prp Works
 
 1. **Load Context**: Reads the entire PRP
-2. **Plan**: Creates detailed task list using TodoWrite
+2. **Plan**: Creates detailed task list
 3. **Execute**: Implements each component
 4. **Validate**: Runs tests and linting
 5. **Iterate**: Fixes any issues found
 6. **Complete**: Ensures all requirements met
-
-See `PRPs/EXAMPLE_multi_agent_prp.md` for a complete example of what gets generated.
 
 ## Using Examples Effectively
 
@@ -227,39 +227,35 @@ The `examples/` folder is **critical** for success. AI coding assistants perform
 
 ### What to Include in Examples
 
-1. **Code Structure Patterns**
-   - How you organize modules
-   - Import conventions
-   - Class/function patterns
+#### Flutter Examples (`examples/flutter/`)
+1. **API Service Pattern** - How you handle HTTP requests
+2. **State Management** - Your chosen pattern (Provider/Riverpod/Bloc)
+3. **Model Classes** - JSON serialization patterns
+4. **Widget Structure** - How you organize UI components
+5. **Navigation** - Routing patterns
 
-2. **Testing Patterns**
-   - Test file structure
-   - Mocking approaches
-   - Assertion styles
-
-3. **Integration Patterns**
-   - API client implementations
-   - Database connections
-   - Authentication flows
-
-4. **CLI Patterns**
-   - Argument parsing
-   - Output formatting
-   - Error handling
+#### Backend Examples (`examples/backend/`)
+1. **Controller Pattern** - Express route handlers
+2. **Service Layer** - Business logic organization
+3. **Database Operations** - Prisma/Sequelize patterns
+4. **Middleware** - Auth, validation, error handling
+5. **API Response Format** - Consistent structure
 
 ### Example Structure
 
 ```
 examples/
 ├── README.md           # Explains what each example demonstrates
-├── cli.py             # CLI implementation pattern
-├── agent/             # Agent architecture patterns
-│   ├── agent.py      # Agent creation pattern
-│   ├── tools.py      # Tool implementation pattern
-│   └── providers.py  # Multi-provider pattern
-└── tests/            # Testing patterns
-    ├── test_agent.py # Unit test patterns
-    └── conftest.py   # Pytest configuration
+├── flutter/
+│   ├── api_service.dart       # HTTP client pattern
+│   ├── auth_provider.dart     # State management example
+│   ├── user_model.dart        # Data model pattern
+│   └── home_screen.dart       # Screen structure pattern
+└── backend/
+    ├── auth.controller.js     # Controller pattern
+    ├── user.service.js        # Service pattern
+    ├── auth.middleware.js     # Middleware pattern
+    └── prisma.service.js      # Database pattern
 ```
 
 ## Best Practices
@@ -268,28 +264,57 @@ examples/
 - Don't assume the AI knows your preferences
 - Include specific requirements and constraints
 - Reference examples liberally
+- Specify target platforms clearly
 
 ### 2. Provide Comprehensive Examples
 - More examples = better implementations
 - Show both what to do AND what not to do
 - Include error handling patterns
+- Show platform-specific code
 
 ### 3. Use Validation Gates
 - PRPs include test commands that must pass
 - AI will iterate until all validations succeed
 - This ensures working code on first try
 
-### 4. Leverage Documentation
-- Include official API docs
-- Add MCP server resources
-- Reference specific documentation sections
+### 4. Platform Considerations
+- Always specify which platforms (iOS/Android/Web)
+- Include platform-specific requirements
+- Note UI differences between platforms
+- Test on all target platforms
 
 ### 5. Customize CLAUDE.md
-- Add your conventions
-- Include project-specific rules
-- Define coding standards
+- Add your Flutter conventions
+- Include Node.js standards
+- Define API patterns
+- Specify testing requirements
+
+## Tech Stack Configuration
+
+### Flutter Frontend
+- **Framework**: Flutter 3.x+
+- **State Management**: Provider/Riverpod/Bloc (specify in INITIAL.md)
+- **HTTP Client**: Dio
+- **Local Storage**: SharedPreferences/Hive
+- **Navigation**: GoRouter
+
+### Node.js Backend
+- **Runtime**: Node.js 20.x LTS
+- **Framework**: Express.js
+- **Database**: PostgreSQL with Prisma
+- **Authentication**: JWT
+- **Validation**: Joi/Zod
+- **API Documentation**: Swagger
+
+### Development Environment
+- **Docker**: For PostgreSQL and other services
+- **Hot Reload**: Both Flutter and Node.js
+- **Testing**: Jest (backend), Flutter test (frontend)
 
 ## Resources
 
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
+- [Flutter Documentation](https://docs.flutter.dev)
+- [Node.js Best Practices](https://github.com/goldbergyoni/nodebestpractices)
+- [Prisma Documentation](https://www.prisma.io/docs)
 - [Context Engineering Best Practices](https://www.philschmid.de/context-engineering)

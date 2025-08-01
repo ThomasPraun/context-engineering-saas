@@ -1,212 +1,269 @@
-name: "Base PRP Template v2 - Context-Rich with Validation Loops"
+name: "Flutter/Node.js PRP Template"
 description: |
 
 ## Purpose
-Template optimized for AI agents to implement features with sufficient context and self-validation capabilities to achieve working code through iterative refinement.
+Template optimized for AI agents to implement Flutter multiplatform features with Node.js backend, including sufficient context and self-validation capabilities.
 
 ## Core Principles
-1. **Context is King**: Include ALL necessary documentation, examples, and caveats
-2. **Validation Loops**: Provide executable tests/lints the AI can run and fix
-3. **Information Dense**: Use keywords and patterns from the codebase
+1. **Context is King**: Include ALL necessary documentation, examples, and platform considerations
+2. **Validation Loops**: Provide executable tests the AI can run and fix
+3. **Platform Awareness**: Consider iOS, Android, and Web differences
 4. **Progressive Success**: Start simple, validate, then enhance
-5. **Global rules**: Be sure to follow all rules in CLAUDE.md
+5. **Global Rules**: Follow all rules in CLAUDE.md
 
 ---
 
 ## Goal
-[What needs to be built - be specific about the end state and desires]
+[What needs to be built - be specific about the end state across all platforms]
 
 ## Why
 - [Business value and user impact]
 - [Integration with existing features]
-- [Problems this solves and for whom]
+- [Problems this solves]
 
 ## What
 [User-visible behavior and technical requirements]
 
 ### Success Criteria
+- [ ] Works on iOS, Android, and Web
 - [ ] [Specific measurable outcomes]
+- [ ] All tests passing
+- [ ] Performance targets met
 
 ## All Needed Context
 
-### Documentation & References (list all context needed to implement the feature)
+### Documentation & References
 ```yaml
 # MUST READ - Include these in your context window
-- url: [Official API docs URL]
-  why: [Specific sections/methods you'll need]
+- url: [Flutter documentation URL]
+  why: [Specific widgets or patterns needed]
   
-- file: [path/to/example.py]
-  why: [Pattern to follow, gotchas to avoid]
+- url: [Node.js/Express documentation]
+  why: [Backend patterns needed]
   
-- doc: [Library documentation URL] 
-  section: [Specific section about common pitfalls]
-  critical: [Key insight that prevents common errors]
-
-- docfile: [PRPs/ai_docs/file.md]
-  why: [docs that the user has pasted in to the project]
-
+- file: examples/flutter/[file].dart
+  why: [Pattern to follow]
+  
+- file: examples/backend/[file].js  
+  why: [Backend pattern to follow]
+  
+- doc: [Package documentation]
+  critical: [Key insight that prevents errors]
 ```
 
-### Current Codebase tree (run `tree` in the root of the project) to get an overview of the codebase
+### Current Codebase Structure
 ```bash
+frontend/
+├── lib/
+│   ├── models/
+│   ├── providers/
+│   ├── services/
+│   ├── screens/
+│   └── widgets/
 
+backend/
+├── controllers/
+├── services/
+├── middleware/
+├── models/
+└── routes/
 ```
 
-### Desired Codebase tree with files to be added and responsibility of file
-```bash
-
+### Platform-Specific Considerations
+```yaml
+iOS:
+  - Minimum version: 
+  - Special permissions:
+  - Platform-specific UI:
+  
+Android:
+  - Minimum SDK:
+  - Permissions needed:
+  - Material Design considerations:
+  
+Web:
+  - Browser support:
+  - Responsive breakpoints:
+  - PWA considerations:
 ```
 
-### Known Gotchas of our codebase & Library Quirks
-```python
-# CRITICAL: [Library name] requires [specific setup]
-# Example: FastAPI requires async functions for endpoints
-# Example: This ORM doesn't support batch inserts over 1000 records
-# Example: We use pydantic v2 and  
+### Known Gotchas
+```dart
+// Flutter gotchas
+// Example: setState() called after dispose()
+// Example: Platform.isIOS doesn't work on web
+```
+
+```javascript
+// Node.js gotchas
+// Example: Prisma connection pool limits
+// Example: JWT expiration handling
 ```
 
 ## Implementation Blueprint
 
-### Data models and structure
+### Data Models
 
-Create the core data models, we ensure type safety and consistency.
-```python
-Examples: 
- - orm models
- - pydantic models
- - pydantic schemas
- - pydantic validators
-
+#### Flutter Models
+```dart
+// lib/models/[model].dart
+class Model {
+  // Follow pattern from examples
+  
+  factory Model.fromJson(Map<String, dynamic> json) {
+    // Handle null values
+  }
+  
+  Map<String, dynamic> toJson() {
+    // Convert to JSON
+  }
+}
 ```
 
-### list of tasks to be completed to fullfill the PRP in the order they should be completed
+#### Backend Database Schema
+```prisma
+// Prisma schema additions
+model NewModel {
+  id        String   @id @default(uuid())
+  // fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+```
+
+### Implementation Tasks
 
 ```yaml
-Task 1:
-MODIFY src/existing_module.py:
-  - FIND pattern: "class OldImplementation"
-  - INJECT after line containing "def __init__"
-  - PRESERVE existing method signatures
+Task 1 - Backend API Setup:
+  CREATE controllers/[feature].controller.js:
+    - PATTERN: Follow existing controller pattern
+    - IMPLEMENT: CRUD operations
+    - USE: Input validation
+    - INCLUDE: Error handling
 
-CREATE src/new_feature.py:
-  - MIRROR pattern from: src/similar_feature.py
-  - MODIFY class name and core logic
-  - KEEP error handling pattern identical
+  CREATE services/[feature].service.js:
+    - PATTERN: Business logic separation
+    - USE: Prisma for database
+    - IMPLEMENT: Complex operations
 
-...(...)
+  UPDATE routes/index.js:
+    - ADD: New routes
+    - USE: Authentication middleware
 
-Task N:
-...
+Task 2 - Flutter State Management:
+  CREATE lib/providers/[feature]_provider.dart:
+    - PATTERN: Follow existing providers
+    - USE: ChangeNotifier
+    - IMPLEMENT: State management
+    - HANDLE: Loading and error states
 
-```
+Task 3 - Flutter UI Implementation:
+  CREATE lib/screens/[feature]_screen.dart:
+    - USE: Scaffold structure
+    - IMPLEMENT: Platform-specific UI
+    - ADD: Responsive design
+    - HANDLE: All states
 
+  CREATE lib/widgets/[feature]_widget.dart:
+    - KEEP: Reusable and focused
+    - USE: Platform adaptive widgets
 
-### Per task pseudocode as needed added to each task
-```python
+Task 4 - Integration:
+  UPDATE lib/services/api_service.dart:
+    - ADD: New endpoints
+    - IMPLEMENT: Error handling
+    - USE: Dio interceptors
 
-# Task 1
-# Pseudocode with CRITICAL details dont write entire code
-async def new_feature(param: str) -> Result:
-    # PATTERN: Always validate input first (see src/validators.py)
-    validated = validate_input(param)  # raises ValidationError
-    
-    # GOTCHA: This library requires connection pooling
-    async with get_connection() as conn:  # see src/db/pool.py
-        # PATTERN: Use existing retry decorator
-        @retry(attempts=3, backoff=exponential)
-        async def _inner():
-            # CRITICAL: API returns 429 if >10 req/sec
-            await rate_limiter.acquire()
-            return await external_api.call(validated)
-        
-        result = await _inner()
-    
-    # PATTERN: Standardized response format
-    return format_response(result)  # see src/utils/responses.py
+Task 5 - Testing:
+  CREATE test/[feature]_test.dart:
+    - TEST: Widget rendering
+    - TEST: State management
+    - TEST: API integration
+
+  CREATE backend/tests/[feature].test.js:
+    - TEST: All endpoints
+    - TEST: Business logic
+    - TEST: Error cases
 ```
 
 ### Integration Points
 ```yaml
-DATABASE:
-  - migration: "Add column 'feature_enabled' to users table"
-  - index: "CREATE INDEX idx_feature_lookup ON users(feature_id)"
+API Endpoints:
+  - GET /api/[resource]
+  - POST /api/[resource]
+  - PUT /api/[resource]/:id
+  - DELETE /api/[resource]/:id
+
+Database:
+  - Migration needed
+  - Indexes to add
   
-CONFIG:
-  - add to: config/settings.py
-  - pattern: "FEATURE_TIMEOUT = int(os.getenv('FEATURE_TIMEOUT', '30'))"
-  
-ROUTES:
-  - add to: src/api/routes.py  
-  - pattern: "router.include_router(feature_router, prefix='/feature')"
+Flutter Navigation:
+  - Add to router
+  - Deep linking setup
 ```
 
 ## Validation Loop
 
-### Level 1: Syntax & Style
+### Level 1: Linting
 ```bash
-# Run these FIRST - fix any errors before proceeding
-ruff check src/new_feature.py --fix  # Auto-fix what's possible
-mypy src/new_feature.py              # Type checking
+# Flutter
+flutter analyze
 
-# Expected: No errors. If errors, READ the error and fix.
+# Backend
+npm run lint
 ```
 
-### Level 2: Unit Tests each new feature/file/function use existing test patterns
-```python
-# CREATE test_new_feature.py with these test cases:
-def test_happy_path():
-    """Basic functionality works"""
-    result = new_feature("valid_input")
-    assert result.status == "success"
-
-def test_validation_error():
-    """Invalid input raises ValidationError"""
-    with pytest.raises(ValidationError):
-        new_feature("")
-
-def test_external_api_timeout():
-    """Handles timeouts gracefully"""
-    with mock.patch('external_api.call', side_effect=TimeoutError):
-        result = new_feature("valid")
-        assert result.status == "error"
-        assert "timeout" in result.message
-```
-
+### Level 2: Unit Tests
 ```bash
-# Run and iterate until passing:
-uv run pytest test_new_feature.py -v
-# If failing: Read error, understand root cause, fix code, re-run (never mock to pass)
+# Flutter
+flutter test
+
+# Backend
+npm test
 ```
 
-### Level 3: Integration Test
+### Level 3: Platform Testing
 ```bash
-# Start the service
-uv run python -m src.main --dev
+# iOS
+flutter run -d ios
 
-# Test the endpoint
-curl -X POST http://localhost:8000/feature \
-  -H "Content-Type: application/json" \
-  -d '{"param": "test_value"}'
+# Android  
+flutter run -d android
 
-# Expected: {"status": "success", "data": {...}}
-# If error: Check logs at logs/app.log for stack trace
+# Web
+flutter run -d chrome
 ```
 
-## Final validation Checklist
-- [ ] All tests pass: `uv run pytest tests/ -v`
-- [ ] No linting errors: `uv run ruff check src/`
-- [ ] No type errors: `uv run mypy src/`
-- [ ] Manual test successful: [specific curl/command]
-- [ ] Error cases handled gracefully
-- [ ] Logs are informative but not verbose
-- [ ] Documentation updated if needed
+### Level 4: Integration Testing
+```bash
+# Start backend
+npm run dev
 
----
+# Test API
+curl http://localhost:3000/api/endpoint
+
+# Run Flutter integration tests
+flutter test integration_test/
+```
+
+## Final Validation Checklist
+- [ ] Flutter: No analyzer issues
+- [ ] Backend: No linting errors
+- [ ] All unit tests passing
+- [ ] Works on all platforms
+- [ ] Responsive design verified
+- [ ] API documented
+- [ ] Error handling complete
+- [ ] Performance acceptable
+- [ ] Security reviewed
 
 ## Anti-Patterns to Avoid
-- ❌ Don't create new patterns when existing ones work
-- ❌ Don't skip validation because "it should work"  
-- ❌ Don't ignore failing tests - fix them
-- ❌ Don't use sync functions in async context
-- ❌ Don't hardcode values that should be config
-- ❌ Don't catch all exceptions - be specific
+- ❌ Don't hardcode values
+- ❌ Don't skip platform testing
+- ❌ Don't ignore error states
+- ❌ Don't forget loading indicators
+- ❌ Don't trust client validation alone
+- ❌ Don't use synchronous I/O
+- ❌ Don't skip null checks
+- ❌ Don't ignore offline scenarios
