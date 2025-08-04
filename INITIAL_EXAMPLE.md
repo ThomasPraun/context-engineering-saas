@@ -17,7 +17,7 @@ Real-time task management application with collaborative features. Users can cre
 - Real-time Updates: Socket.io client
 
 ### Node.js Backend  
-- Database: PostgreSQL with Prisma ORM
+- Database: PostgreSQL with pg driver
 - Authentication: JWT with refresh tokens
 - Real-time: Socket.io for live updates
 - File Storage: Local filesystem for attachments
@@ -56,18 +56,18 @@ Real-time task management application with collaborative features. Users can cre
 ## EXAMPLES:
 
 In the `examples/` folder:
-- `examples/flutter/api_service.dart` - Use this pattern for API calls with offline queue
-- `examples/flutter/task_provider.dart` - Reference for state management with Provider
-- `examples/flutter/task_model.dart` - Follow this structure for data models
-- `examples/backend/auth.controller.js` - Use for authentication endpoints
-- `examples/backend/prisma.service.js` - Database connection pattern
+- `examples/flutter/user.dart` - Follow this structure for data models
+- `examples/flutter/router.dart` - Navigation patterns with GoRouter
+- `examples/flutter/app_validators.dart` - Form validation patterns
+- `examples/backend/users.controllers.js` - Controller patterns
+- `examples/backend/db.js` - Database connection pattern
 
 ## DOCUMENTATION:
 
 - Provider package: https://pub.dev/packages/provider
 - Hive documentation: https://docs.hivedb.dev/
 - Socket.io client for Flutter: https://pub.dev/packages/socket_io_client
-- Prisma documentation: https://www.prisma.io/docs
+- PostgreSQL documentation: https://www.postgresql.org/docs/
 - JWT implementation: https://github.com/auth0/node-jsonwebtoken
 
 ## OTHER CONSIDERATIONS:
@@ -100,7 +100,7 @@ In the `examples/` folder:
 - Socket.io connection must be singleton in Flutter
 - Hive requires initialization before use
 - iOS notifications need special handling when app is killed
-- Prisma migrations must run before server start
+- Database schema must be set up before server start
 - Handle JWT expiration gracefully
 
 ### Testing Requirements:

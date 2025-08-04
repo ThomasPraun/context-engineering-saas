@@ -16,16 +16,15 @@ git clone https://github.com/your-username/context-engineering-flutter-node
 # 3. Add examples (highly recommended)
 # Place relevant code examples in the examples/ folder
 
-# 4. Create your initial feature request
+# 4. Review PLANNING.md
+# Understand the project architecture and constraints
+
+# 5. Create your initial feature request
 # Edit INITIAL.md with your feature requirements
 
-# 5. Generate a comprehensive PRP (Product Requirements Prompt)
-# In Claude Code, run:
-/generate-prp INITIAL.md
-
-# 6. Execute the PRP to implement your feature
-# In Claude Code, run:
-/execute-prp PRPs/your-feature-name.md
+# 6. Use Context Engineering with your AI assistant
+# Provide INITIAL.md and relevant files to your AI coding assistant
+# The AI will use the context to implement your feature properly
 ```
 
 ## 📚 Table of Contents
@@ -65,24 +64,20 @@ Context Engineering represents a paradigm shift from traditional prompt engineer
 
 ```
 context-engineering-flutter-node/
-├── .claude/
-│   ├── commands/
-│   │   ├── generate-prp.md    # Generates comprehensive PRPs
-│   │   └── execute-prp.md     # Executes PRPs to implement features
-│   └── settings.local.json    # Claude Code permissions
 ├── PRPs/
-│   ├── templates/
-│   │   └── prp_base.md       # Base template for PRPs
-│   └── EXAMPLE_multi_agent_prp.md  # Example of a complete PRP
+│   └── templates/
+│       └── prp_base.md       # Base template for PRPs
 ├── examples/                  # Your code examples (critical!)
 │   ├── flutter/              # Flutter patterns and examples
 │   └── backend/              # Node.js patterns and examples
-├── frontend/              # Your Flutter application
+├── frontend/                 # Your Flutter application
 ├── backend/                  # Your Node.js backend
-├── CLAUDE.md                # Global rules for AI assistant
-├── INITIAL.md               # Template for feature requests
-├── INITIAL_EXAMPLE.md       # Example feature request
-└── README.md                # This file
+├── CLAUDE.md                 # Global rules for AI assistant
+├── INITIAL.md                # Template for feature requests
+├── INITIAL_EXAMPLE.md        # Example feature request
+├── PLANNING.md               # Project architecture and goals
+├── TASK.md                   # Task tracking
+└── README.md                 # This file
 ```
 
 ## Step-by-Step Guide
@@ -122,7 +117,7 @@ Edit `INITIAL.md` to describe what you want to build:
 
 **See `INITIAL_EXAMPLE.md` for a complete example.**
 
-### 3. Generate the PRP
+### 3. Working with PRPs
 
 PRPs (Product Requirements Prompts) are comprehensive implementation blueprints that include:
 
@@ -131,31 +126,29 @@ PRPs (Product Requirements Prompts) are comprehensive implementation blueprints 
 - Error handling patterns
 - Test requirements
 
-Run in Claude Code:
-```bash
-/generate-prp INITIAL.md
-```
+To use PRPs effectively:
 
-This command will:
-1. Read your feature request
-2. Research the codebase for patterns
-3. Search for relevant documentation
-4. Create a comprehensive PRP in `PRPs/your-feature-name.md`
+1. **Create a PRP** using the template in `PRPs/templates/prp_base.md`
+2. **Fill in all sections** with specific requirements for your feature
+3. **Include relevant documentation** links and example references
+4. **Define clear success criteria** and validation steps
 
-### 4. Execute the PRP
+### 4. Implementing Features with AI
 
-Once generated, execute the PRP to implement your feature:
+When working with an AI coding assistant:
 
-```bash
-/execute-prp PRPs/your-feature-name.md
-```
+1. **Provide comprehensive context**:
+   - Share CLAUDE.md for project rules
+   - Include INITIAL.md or your PRP
+   - Reference relevant example files
+   - Share PLANNING.md for architecture understanding
 
-The AI coding assistant will:
-1. Read all context from the PRP
-2. Create a detailed implementation plan
-3. Execute each step with validation
-4. Run tests and fix any issues
-5. Ensure all success criteria are met
+2. **The AI will**:
+   - Read all provided context
+   - Follow established patterns
+   - Implement features across Flutter and Node.js
+   - Create tests alongside implementation
+   - Validate work against success criteria
 
 ## Writing Effective INITIAL.md Files
 
@@ -189,37 +182,40 @@ The AI coding assistant will:
 
 ## The PRP Workflow
 
-### How /generate-prp Works
+### Creating Effective PRPs
 
-The command follows this process:
+When creating a PRP:
 
 1. **Research Phase**
-   - Analyzes your Flutter and Node.js codebase
-   - Searches for similar implementations
-   - Identifies conventions to follow
+   - Analyze your Flutter and Node.js codebase
+   - Look for similar implementations
+   - Identify conventions to follow
 
 2. **Documentation Gathering**
-   - Fetches relevant Flutter/Dart docs
-   - Includes Node.js/Express patterns
-   - Adds package documentation
+   - Include relevant Flutter/Dart docs
+   - Add Node.js/Express patterns
+   - Reference package documentation
 
 3. **Blueprint Creation**
-   - Creates step-by-step implementation plan
-   - Includes validation gates
-   - Adds test requirements
+   - Create step-by-step implementation plan
+   - Include validation gates
+   - Add test requirements
 
 4. **Quality Check**
-   - Scores confidence level (1-10)
-   - Ensures all context is included
+   - Ensure all context is included
+   - Verify success criteria are measurable
+   - Check that examples are referenced
 
-### How /execute-prp Works
+### Using PRPs with AI
 
-1. **Load Context**: Reads the entire PRP
-2. **Plan**: Creates detailed task list
-3. **Execute**: Implements each component
-4. **Validate**: Runs tests and linting
-5. **Iterate**: Fixes any issues found
-6. **Complete**: Ensures all requirements met
+When providing a PRP to an AI assistant:
+
+1. **Load Context**: Share the entire PRP document
+2. **Planning**: AI creates detailed task list
+3. **Execution**: AI implements each component
+4. **Validation**: AI runs tests and linting
+5. **Iteration**: AI fixes any issues found
+6. **Completion**: AI ensures all requirements are met
 
 ## Using Examples Effectively
 
@@ -301,10 +297,10 @@ examples/
 ### Node.js Backend
 - **Runtime**: Node.js 20.x LTS
 - **Framework**: Express.js
-- **Database**: PostgreSQL with Prisma
+- **Database**: PostgreSQL with pg driver
 - **Authentication**: JWT
-- **Validation**: Joi/Zod
-- **API Documentation**: Swagger
+- **Validation**: Manual or library of choice
+- **API Documentation**: Swagger (optional)
 
 ### Development Environment
 - **Docker**: For PostgreSQL and other services

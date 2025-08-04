@@ -4,89 +4,125 @@ This directory contains example code patterns that should be followed throughout
 
 ## Flutter Examples
 
-### `flutter/api_service.dart`
-**Purpose**: HTTP client setup with authentication and error handling
-
-**Key patterns demonstrated**:
-- Dio interceptors for auth token management
-- Automatic token refresh on 401 errors
-- Centralized error handling and transformation
-- Request/response logging in debug mode
-- File upload with progress tracking
-- Type-safe API responses
-
-**When to use**: Reference this when implementing any API calls in your Flutter app.
-
-### `flutter/auth_provider.dart`
-**Purpose**: Authentication state management using Provider pattern
-
-**Key patterns demonstrated**:
-- ChangeNotifier for reactive state
-- JWT token management
-- Offline support with cached user data
-- Error state handling
-- Login/logout/registration flows
-- Permission and role checking
-
-**When to use**: Reference this when implementing any state management or authentication features.
-
-### `flutter/user_model.dart`
+### `flutter/user.dart`
 **Purpose**: Data model with JSON serialization
 
 **Key patterns demonstrated**:
 - Null-safe model design
 - Factory constructors for JSON parsing
 - toJson/fromJson methods
-- copyWith pattern for immutability
-- Nested model relationships
-- Enum handling
-- Model composition
+- Nested model relationships (User and Vehicle)
+- Equality operators and hashCode
+- Comprehensive toString methods
 
 **When to use**: Reference this when creating any data models in Flutter.
 
-## Backend Examples
-
-### `backend/auth.controller.ts`
-**Purpose**: Express controller with authentication endpoints
+### `flutter/app_validators.dart`
+**Purpose**: Centralized form validation patterns
 
 **Key patterns demonstrated**:
-- Async error handling with wrapper
-- Zod validation middleware
-- JWT token generation
-- Password hashing with bcrypt
-- Prisma database operations
-- Consistent response format
-- Transaction handling
+- Reusable validation functions
+- Email, password, and numeric validators
+- Custom validation logic
+- Composite validators
+- Internationalized error messages
+- Length and character type validation
+
+**When to use**: Reference this when implementing form validation in Flutter.
+
+### `flutter/router.dart`
+**Purpose**: App navigation using GoRouter
+
+**Key patterns demonstrated**:
+- Route configuration with GoRouter
+- Authentication-based redirects
+- Shell routes for bottom navigation
+- Custom page transitions
+- Navigation extensions
+- Query parameters handling
+
+**When to use**: Reference this when setting up navigation and routing.
+
+### `flutter/theme.dart`
+**Purpose**: Centralized theme configuration
+
+**Key patterns demonstrated**:
+- Material 3 theme setup
+- Light and dark theme support
+- Custom color schemes
+- Typography definitions
+- Consistent spacing and dimensions
+- AppBar theming
+
+**When to use**: Reference this when implementing UI theming and styling.
+
+### Additional Flutter Utilities
+
+- `flutter/assets_path.dart` - Centralized asset path management
+- `flutter/enum.dart` - Enum definitions and helpers
+- `flutter/messages.dart` - Internationalized message strings
+- `flutter/storage_keys.dart` - Local storage key constants
+
+## Backend Examples
+
+### `backend/index.js`
+**Purpose**: Express server setup and middleware configuration
+
+**Key patterns demonstrated**:
+- ES6 module imports
+- Express middleware setup (morgan, JSON parsing)
+- Route registration
+- Server initialization
+- Environment-based configuration
+
+**When to use**: Reference this when setting up the main server file.
+
+### `backend/users.controllers.js`
+**Purpose**: Express controller with CRUD operations
+
+**Key patterns demonstrated**:
+- Async/await pattern for database operations
+- PostgreSQL queries using pg pool
+- Error handling with appropriate status codes
+- RESTful endpoint implementation
+- Parameterized queries for security
 
 **When to use**: Reference this when creating any Express controllers.
 
-### `backend/prisma.service.ts`
-**Purpose**: Database service singleton with Prisma
+### `backend/users.routes.js`
+**Purpose**: Express route definitions
 
 **Key patterns demonstrated**:
-- Singleton pattern for database connection
-- Soft delete middleware
-- Query performance logging
-- Transaction helpers
-- Pagination utilities
-- Bulk operations
-- Health checks
+- Route organization with Express Router
+- RESTful route naming
+- Controller function mapping
+- Debug mode conditional routes
+- Clean route structure
 
-**When to use**: Reference this when implementing database operations or services.
+**When to use**: Reference this when setting up API routes.
 
-### `backend/validation.middleware.ts`
-**Purpose**: Request validation using Zod schemas
+### `backend/config.js`
+**Purpose**: Environment configuration management
 
 **Key patterns demonstrated**:
-- Schema-based validation
-- Error formatting
-- Reusable validation patterns
-- Custom validators
-- Type inference from schemas
-- File upload validation
-- Input sanitization
+- Environment variable usage
+- Default value fallbacks
+- Configuration exports
+- Database connection strings
+- Debug mode settings
 
-**When to use**: Reference this when implementing API validation.
+**When to use**: Reference this when managing application configuration.
+
+### `backend/db.js`
+**Purpose**: PostgreSQL database connection
+
+**Key patterns demonstrated**:
+- Connection pool setup
+- Type parsing configuration (BIGINT handling)
+- SSL configuration
+- Database connection management
+
+**When to use**: Reference this when setting up database connections.
 
 ## How to Use These Examples
 
@@ -117,10 +153,10 @@ When adding new examples:
 - Provide fallbacks for critical features
 
 ### Type Safety
-- No `any` types in TypeScript
-- Use Zod for runtime validation
-- Leverage TypeScript's type system
 - Use null safety in Dart
+- Validate inputs on both client and server
+- Handle null/undefined cases explicitly
+- Use proper type annotations in JavaScript
 
 ### State Management
 - Single source of truth
@@ -136,20 +172,23 @@ When adding new examples:
 
 ### Security
 - Never expose sensitive data
-- Hash passwords
+- Store passwords securely (when implementing auth)
 - Validate all inputs
-- Use authentication middleware
+- Use parameterized queries for database operations
+- Sanitize user data
 
 ## Platform-Specific Considerations
 
 ### Flutter
-- Handle platform differences (iOS vs Android)
-- Implement responsive design
+- Handle platform differences (iOS vs Android vs Web)
+- Implement responsive design for all screen sizes
 - Consider offline functionality
 - Optimize for performance
+- Use platform-specific widgets when appropriate
 
 ### Node.js
 - Use async/await everywhere
-- Implement proper middleware
-- Handle database connections carefully
-- Use environment variables
+- Implement proper middleware ordering
+- Handle database connections with pools
+- Use environment variables for configuration
+- Always handle promise rejections

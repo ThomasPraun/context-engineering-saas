@@ -96,7 +96,7 @@ Web:
 
 ```javascript
 // Node.js gotchas
-// Example: Prisma connection pool limits
+// Example: PostgreSQL connection pool limits
 // Example: JWT expiration handling
 ```
 
@@ -121,14 +121,14 @@ class Model {
 ```
 
 #### Backend Database Schema
-```prisma
-// Prisma schema additions
-model NewModel {
-  id        String   @id @default(uuid())
-  // fields
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+```sql
+-- PostgreSQL schema additions
+CREATE TABLE new_table (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  -- fields
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 ```
 
 ### Implementation Tasks
@@ -143,7 +143,7 @@ Task 1 - Backend API Setup:
 
   CREATE services/[feature].service.js:
     - PATTERN: Business logic separation
-    - USE: Prisma for database
+    - USE: pg pool for database queries
     - IMPLEMENT: Complex operations
 
   UPDATE routes/index.js:

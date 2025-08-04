@@ -13,9 +13,9 @@
   - Follow Material Design on Android, Cupertino on iOS
   - Implement responsive design for different screen sizes
 - **Backend**: Node.js with Express in `/backend` directory
-  - Use ES6+ JavaScript or TypeScript
-  - PostgreSQL with Prisma ORM
-  - JWT-based authentication
+  - Use ES6+ JavaScript with modules
+  - PostgreSQL with pg driver
+  - JWT-based authentication (when needed)
   - RESTful API design
 - **Development**: Docker Compose for PostgreSQL and other services
 
@@ -167,6 +167,6 @@
 - **Use Docker Compose** for local development
 - **Services include**:
   - PostgreSQL database
-  - pgAdmin for database management
-  - Redis for caching (optional)
+  - pgAdmin for database management (optional)
+  - Additional services as needed
 - **Hot reload** enabled for both Flutter and Node.js
